@@ -1,0 +1,33 @@
+<div *ngIf="!this.game">
+    <button type="button" class="btn btn-block btn-lg btn-outline-dark" [routerLink]="['/create']">
+        <i class="fa fa-gamepad"></i> New Game
+    </button>
+</div>
+<div class="players clocks row" *ngIf="this.game && this.game.players">
+    <div *ngFor="let player of this.game.players" class="col">
+        <div class="text-center margin-auto">
+            <app-countdown [player]="player"></app-countdown>
+        </div>
+    </div>
+</div>
+<div class="questions text-center" *ngIf="this.questions">
+    <span *ngFor="let question of this.questions" class="number" [class.font-weight-bold]="question % 3 === 0"
+        [class.painted]="question === this.current">
+        {{question}}
+    </span>
+</div>
+<div *ngIf="this.game && this.questions && this.current <= this.questions.length" class="answers">
+    <div class="row">
+        <div class="col-6">
+            <button class="btn btn-success btn-block btn-lg" (click)="this.correct()"><i class="fa fa-check"
+                    aria-hidden="true"></i></button>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-danger btn-block btn-lg" (click)="this.incorrect()"><i class="fa fa-times"
+                    aria-hidden="true"></i></button>
+        </div>
+    </div>
+</div>
+<div class="game-controls">
+    <app-game-controls [game]="this.game" [possibleSeconds]="[-30, 30]"></app-game-controls>
+</div>

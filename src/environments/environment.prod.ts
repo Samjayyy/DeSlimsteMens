@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  host: '',
+  apiPrefix: '/games/dsmtw/api/'
 };

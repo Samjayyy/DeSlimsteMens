@@ -1,0 +1,23 @@
+.countdown {
+    display:inline-block;
+    .player-name {
+        margin: auto;
+        text-align:center;
+        vertical-align: middle;
+        font-size:40px;
+    }
+    .timer {
+        background-image: url('../../../../../assets/img/timer-background.png');
+        background-repeat: no-repeat;
+        background-size:contain;
+        background-position: center center;
+        display: inline-block;
+        min-width:280px;
+        min-height:175px;
+        .time-display {
+            text-align:center;
+            font-size:60px;
+            margin-top:25%;
+        }
+    }
+} 

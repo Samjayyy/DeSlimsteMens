@@ -1,0 +1,11 @@
+.questions {
+    border-width:1px;
+    margin:10px;
+    padding:10px;
+    border-style: solid none;
+    font-size:60px;
+    .number {
+        border-radius: 50%;
+        padding:5px 5px 5px 15px;
+    }
+}

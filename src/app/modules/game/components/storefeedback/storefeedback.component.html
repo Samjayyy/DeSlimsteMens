@@ -1,0 +1,6 @@
+<div class="spinner-border text-primary" role="status" *ngIf="this.isFetching">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="alert alert-danger" *ngIf="!this.isFetching && this.error">
+  <strong>Error</strong>: {{ this.error || 'Onverwachte fout' }}
+</div>
