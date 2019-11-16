@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { Player } from 'src/app/shared/models/player.model';
 import { Router } from '@angular/router';
 import { Configuration } from 'src/app/app.constants';
+import { takeUntil } from 'rxjs/operators';
+import { Store } from 'src/app/core/services/store/stores';
 
 @Component({
   selector: 'app-create-game',
@@ -33,6 +35,18 @@ export class CreateGameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.gameStore
+      .store$
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((store: Store<Game>) => {
+        if (store.data !== null) {
+          this.playerscount = store.data.players.length;
+          for (let i = 0; i < this.playerscount; i++) {
+            this.players[i] = store.data.players[i];
+          }
+          this.refreshFilteredPlayers();
+        }
+      });
   }
 
   refreshFilteredPlayers(): void {

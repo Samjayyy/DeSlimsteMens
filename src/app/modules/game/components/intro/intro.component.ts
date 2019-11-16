@@ -45,6 +45,8 @@ export class IntroComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.introAudio.pause();
+    this.introAudio.currentTime = 0;
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
