@@ -12,6 +12,7 @@ import { ThreeSixNineComponent } from './components/threesixnine/threesixnine.co
 import { GameControlsComponent } from './components/game-controls/game-controls.component';
 import { CreateGameComponent } from './components/create-game/create-game.component';
 import { IntroComponent } from './components/intro/intro.component';
+import { PuzzleComponent } from './components/puzzle/puzzle.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { IntroComponent } from './components/intro/intro.component';
     StoreFeedbackComponent,
     CountdownComponent,
     ThreeSixNineComponent,
+    PuzzleComponent,
     GameControlsComponent,
     CreateGameComponent,
     IntroComponent

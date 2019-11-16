@@ -1,0 +1,15 @@
+<div *ngIf="!this.game">
+    <button type="button" class="btn btn-block btn-lg btn-outline-dark" [routerLink]="['/create']">
+        <i class="fa fa-gamepad"></i> New Game
+    </button>
+</div>
+<div class="players clocks row" *ngIf="this.game && this.game.players">
+    <div *ngFor="let player of this.game.players" class="col">
+        <div class="text-center margin-auto">
+            <app-countdown [player]="player"></app-countdown>
+        </div>
+    </div>
+</div>
+<div class="game-controls">
+    <app-game-controls [game]="this.game" [possibleSeconds]="[-30, 30]"></app-game-controls>
+</div>

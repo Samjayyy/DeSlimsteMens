@@ -4,6 +4,7 @@ import { GameStore } from 'src/app/core/services/store/game.store';
 import { Subject } from 'rxjs';
 import { Player } from 'src/app/shared/models/player.model';
 import { Router } from '@angular/router';
+import { Configuration } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-create-game',
@@ -12,8 +13,6 @@ import { Router } from '@angular/router';
 })
 export class CreateGameComponent implements OnInit, OnDestroy {
 
-  readonly maxNumberOfPlayers = 4;
-  readonly numberOfStartSeconds = 60;
   private unsubscribe: Subject<void> = new Subject();
   players: Player[];
   filteredPlayers: Player[];
@@ -22,11 +21,12 @@ export class CreateGameComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
+    private configuration: Configuration,
     private router: Router
   ) {
     this.playerscount = 3; // most common setting
     this.players = [];
-    for (let i = 0; i < this.maxNumberOfPlayers; i++) {
+    for (let i = 0; i < this.configuration.MaxNumberOfPlayers; i++) {
       this.players.push(new Player());
     }
     this.refreshFilteredPlayers();
@@ -45,7 +45,7 @@ export class CreateGameComponent implements OnInit, OnDestroy {
         || player.name.length < 1) {
         return false;
       }
-      player.secondsLeft = this.numberOfStartSeconds;
+      player.secondsLeft = this.configuration.StartSeconds;
       player.selected = false;
     }
     const game = new Game(this.filteredPlayers);
