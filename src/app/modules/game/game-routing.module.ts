@@ -4,6 +4,9 @@ import { ThreeSixNineComponent } from './components/threesixnine/threesixnine.co
 import { CreateGameComponent } from './components/create-game/create-game.component';
 import { IntroComponent } from './components/intro/intro.component';
 import { PuzzleComponent } from './components/puzzle/puzzle.component';
+import { OpenDoorComponent } from './components/open-door/open-door.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { CollectiveMemoryComponent } from './components/collective-memory/collective-memory.component';
 
 const routes: Routes = [
   {
@@ -24,8 +27,20 @@ const routes: Routes = [
     component: ThreeSixNineComponent
   },
   {
+    path: 'open-door',
+    component: OpenDoorComponent
+  },
+  {
     path: 'puzzle',
     component: PuzzleComponent
+  },
+  {
+    path: 'gallery',
+    component: GalleryComponent
+  },
+  {
+    path: 'collective-memory',
+    component: CollectiveMemoryComponent
   }
 ];
 

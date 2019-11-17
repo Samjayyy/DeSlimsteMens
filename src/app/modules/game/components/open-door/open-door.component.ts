@@ -7,17 +7,16 @@ import { Subject } from 'rxjs';
 import { Configuration } from 'src/app/app.constants';
 
 @Component({
-  selector: 'app-three-six-nine',
-  templateUrl: './threesixnine.component.html',
-  styleUrls: ['./threesixnine.component.scss']
+  selector: 'app-open-door',
+  templateUrl: './open-door.component.html',
+  styleUrls: ['./open-door.component.scss']
 })
-export class ThreeSixNineComponent implements OnInit, OnDestroy {
+export class OpenDoorComponent implements OnInit, OnDestroy {
 
   game: Game;
   current: number;
   private unsubscribe: Subject<void> = new Subject();
-  questions: number[];
-  private starter: number;
+  answers: number[];
   private answerAudio: HTMLAudioElement;
 
   constructor(
@@ -33,17 +32,14 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((store: Store<Game>) => {
         this.game = store.data;
-        if (this.game !== null) {
-          this.starter = this.game.selected;
-        }
       });
 
-    // init round questions
-    this.questions = [];
-    this.current = 1;
+    // init round answsers
+    this.answers = [];
+    this.reset();
     // add questions
-    for (let i = 1; i <= this.configuration.ThreeSixNineQuestions; i++) {
-      this.questions.push(i);
+    for (let i = 1; i <= this.configuration.OpenDoorAnswers; i++) {
+      this.answers.push(i);
     }
 
     this.answerAudio = new Audio('./assets/sounds/answer-correct.mp3');
@@ -51,27 +47,21 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
   }
 
   public correct(): void {
-    if (this.current % 3 === 0) {
-      this.answerAudio.currentTime = 0;
-      this.answerAudio.play();
-      this.game.selectedPlayer.secondsLeft += this.configuration.ThreeSixNineSeconds;
-    }
+    this.answerAudio.currentTime = 0;
+    this.answerAudio.play();
+    this.game.selectedPlayer.secondsLeft += this.configuration.OpenDoorSeconds;
     this.current++;
-    this.starter = this.game.selected;
   }
 
-  public incorrect(): void {
-    this.game.next();
-    if (this.starter === this.game.selected) {
-      this.current++;
-    }
+  public reset(): void {
+    this.current = 0;
   }
 
   public get secondsDiff(): string {
-    if (this.current % 3 === 0) {
-      return `+ ${this.configuration.ThreeSixNineSeconds}`;
+    if (this.current >= this.configuration.OpenDoorAnswers) {
+      return 'well done';
     }
-    return 'voor de eer';
+    return `+ ${this.configuration.OpenDoorSeconds}`;
   }
 
   ngOnDestroy(): void {

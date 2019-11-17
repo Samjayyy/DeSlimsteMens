@@ -14,7 +14,6 @@ export class GameControlsComponent implements OnInit, OnDestroy {
   @Input()
   public game: Game;
 
-  @Input()
   public possibleSeconds: number[];
 
   progress: boolean;
@@ -80,6 +79,7 @@ export class GameControlsComponent implements OnInit, OnDestroy {
     this.game.next();
   }
 
+  // TODO SAM move to other component
   public addSeconds(seconds: number, player?: Player): void {
     this.answerAudio.currentTime = 0;
     this.answerAudio.play();

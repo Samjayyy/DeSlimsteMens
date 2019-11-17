@@ -14,7 +14,10 @@ import { Configuration } from 'src/app/app.constants';
 export class PuzzleComponent implements OnInit, OnDestroy {
 
   game: Game;
+  current: number;
   private unsubscribe: Subject<void> = new Subject();
+  answers: number[];
+  private answerAudio: HTMLAudioElement;
 
   constructor(
     private gameStore: GameStore,
@@ -31,6 +34,34 @@ export class PuzzleComponent implements OnInit, OnDestroy {
         this.game = store.data;
       });
 
+    // init round answsers
+    this.answers = [];
+    this.reset();
+    // add questions
+    for (let i = 1; i <= this.configuration.PuzzleAnswers; i++) {
+      this.answers.push(i);
+    }
+
+    this.answerAudio = new Audio('./assets/sounds/answer-correct.mp3');
+    this.answerAudio.load();
+  }
+
+  public correct(): void {
+    this.answerAudio.currentTime = 0;
+    this.answerAudio.play();
+    this.game.selectedPlayer.secondsLeft += this.configuration.PuzzleSeconds;
+    this.current++;
+  }
+
+  public reset(): void {
+    this.current = 0;
+  }
+
+  public get secondsDiff(): string {
+    if (this.current >= this.configuration.PuzzleAnswers) {
+      return 'well done';
+    }
+    return `+ ${this.configuration.PuzzleSeconds}`;
   }
 
   ngOnDestroy(): void {

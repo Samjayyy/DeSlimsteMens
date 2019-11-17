@@ -13,6 +13,9 @@ import { GameControlsComponent } from './components/game-controls/game-controls.
 import { CreateGameComponent } from './components/create-game/create-game.component';
 import { IntroComponent } from './components/intro/intro.component';
 import { PuzzleComponent } from './components/puzzle/puzzle.component';
+import { OpenDoorComponent } from './components/open-door/open-door.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { CollectiveMemoryComponent } from './components/collective-memory/collective-memory.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { PuzzleComponent } from './components/puzzle/puzzle.component';
     ThreeSixNineComponent,
     PuzzleComponent,
     GameControlsComponent,
+    OpenDoorComponent,
+    GalleryComponent,
+    CollectiveMemoryComponent,
     CreateGameComponent,
     IntroComponent
   ],
