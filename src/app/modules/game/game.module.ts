@@ -16,6 +16,7 @@ import { PuzzleComponent } from './components/puzzle/puzzle.component';
 import { OpenDoorComponent } from './components/open-door/open-door.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { CollectiveMemoryComponent } from './components/collective-memory/collective-memory.component';
+import { FinalsComponent } from './components/finals/finals.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CollectiveMemoryComponent } from './components/collective-memory/collec
     GameControlsComponent,
     OpenDoorComponent,
     GalleryComponent,
+    FinalsComponent,
     CollectiveMemoryComponent,
     CreateGameComponent,
     IntroComponent

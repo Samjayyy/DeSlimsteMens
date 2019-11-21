@@ -3,10 +3,15 @@
         <i class="fa fa-gamepad"></i> New Game
     </button>
 </div>
-<div class="players clocks row" *ngIf="this.game && this.game.players">
-    <div *ngFor="let player of this.game.players" class="col">
-        <div class="text-center margin-auto">
-            <app-countdown [player]="player"></app-countdown>
+<div class="players clocks row">
+    <div class="col">
+        <div class="text-center margin-auto" *ngIf="this.player1">
+            <app-countdown [player]="this.player1"></app-countdown>
+        </div>
+    </div>
+    <div class="col">
+        <div class="text-center margin-auto" *ngIf="this.player2">
+            <app-countdown [player]="this.player2"></app-countdown>
         </div>
     </div>
 </div>
@@ -30,4 +35,20 @@
 </div>
 <div class="game-controls">
     <app-game-controls [game]="this.game" #gamecontrols></app-game-controls>
+</div>
+<div class="row finalists" *ngIf="this.game && this.game.players.length > 1">
+    <div class="col">
+        <select class="form-control" [(ngModel)]="this.player1">
+            <option *ngFor="let player of this.game.players" [ngValue]="player">
+                {{player.name}}
+            </option>
+        </select>
+    </div>
+    <div class="col">
+        <select class="form-control" [(ngModel)]="this.player2">
+            <option *ngFor="let player of this.game.players" [ngValue]="player">
+                {{player.name}}
+            </option>
+        </select>
+    </div>
 </div>

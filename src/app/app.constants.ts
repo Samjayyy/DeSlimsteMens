@@ -14,4 +14,6 @@ export class Configuration {
     public readonly GallerySeconds = 15;
     public readonly CollectiveMemoryAnswers = 5;
     public readonly CollectiveMemorySeconds = 10;
+    public readonly FinalsAnswers = 5;
+    public readonly FinalsSeconds = 20;
 }

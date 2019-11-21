@@ -62,8 +62,9 @@ export class CreateGameComponent implements OnInit, OnDestroy {
       player.secondsLeft = this.configuration.StartSeconds;
       player.selected = false;
     }
-    const game = new Game(this.filteredPlayers);
+    const game = Game.fromPlayers(this.filteredPlayers);
     this.gameStore.next(game);
+    this.gameStore.save(game);
     this.router.navigate(['/intro']);
     return true;
   }

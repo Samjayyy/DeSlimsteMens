@@ -7,6 +7,7 @@ import { PuzzleComponent } from './components/puzzle/puzzle.component';
 import { OpenDoorComponent } from './components/open-door/open-door.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { CollectiveMemoryComponent } from './components/collective-memory/collective-memory.component';
+import { FinalsComponent } from './components/finals/finals.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'collective-memory',
     component: CollectiveMemoryComponent
+  },
+  {
+    path: 'finals',
+    component: FinalsComponent
   }
 ];
 

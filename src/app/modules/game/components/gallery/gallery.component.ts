@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Game } from 'src/app/shared/models/game.model';
 import { GameStore } from 'src/app/core/services/store/game.store';
 import { takeUntil } from 'rxjs/operators';
 import { Store } from 'src/app/core/services/store/stores';
 import { Subject } from 'rxjs';
 import { Configuration } from 'src/app/app.constants';
+import { GameControlsComponent } from '../game-controls/game-controls.component';
 
 @Component({
   selector: 'app-gallery',
@@ -13,12 +14,14 @@ import { Configuration } from 'src/app/app.constants';
 })
 export class GalleryComponent implements OnInit, OnDestroy {
 
+  @ViewChild('gamecontrols', { static: false })
+  private gameControls: GameControlsComponent;
+
   game: Game;
   current: number;
   solved: number;
   private unsubscribe: Subject<void> = new Subject();
   questions: number[];
-  private answerAudio: HTMLAudioElement;
 
   constructor(
     private gameStore: GameStore,
@@ -42,23 +45,29 @@ export class GalleryComponent implements OnInit, OnDestroy {
     for (let i = 1; i <= this.configuration.GalleryQuestions; i++) {
       this.questions.push(i);
     }
-
-    this.answerAudio = new Audio('./assets/sounds/answer-correct.mp3');
-    this.answerAudio.load();
   }
 
   public correct(): void {
-    this.answerAudio.currentTime = 0;
-    this.answerAudio.play();
-    this.game.selectedPlayer.secondsLeft += this.configuration.GallerySeconds;
-    if (this.current <= this.configuration.GalleryQuestions) {
-      this.current++;
+    if (this.solved >= this.configuration.GalleryQuestions) {
+      return;
     }
-    this.solved++;
+    this.next();
+    this.gameControls.addSeconds(this.configuration.GallerySeconds);
+    if (++this.solved === this.configuration.GalleryQuestions) {
+      this.gameControls.stop();
+    }
   }
 
   public incorrect(): void {
-    this.current++;
+    this.next();
+  }
+
+  private next(): void {
+    if (this.current <= this.configuration.GalleryQuestions) {
+      if (++this.current > this.configuration.GalleryQuestions) {
+        this.gameControls.stop();
+      }
+    }
   }
 
   public reset(): void {

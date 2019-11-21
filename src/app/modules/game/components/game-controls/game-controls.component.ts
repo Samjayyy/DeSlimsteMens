@@ -3,6 +3,7 @@ import { timer, Subject } from 'rxjs';
 import { Player } from 'src/app/shared/models/player.model';
 import { takeUntil, filter } from 'rxjs/operators';
 import { Game } from 'src/app/shared/models/game.model';
+import { GameStore } from 'src/app/core/services/store/game.store';
 
 @Component({
   selector: 'app-game-controls',
@@ -23,7 +24,7 @@ export class GameControlsComponent implements OnInit, OnDestroy {
   private answerAudio: HTMLAudioElement;
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor() {
+  constructor(private gameStore: GameStore) {
     this.progress = false;
   }
 
@@ -48,6 +49,13 @@ export class GameControlsComponent implements OnInit, OnDestroy {
     this.playerDead.load();
     this.answerAudio = new Audio('./assets/sounds/answer-correct.mp3');
     this.answerAudio.load();
+  }
+
+  public stop(): boolean {
+    if (!this.progress) {
+      return;
+    }
+    this.startStop();
   }
 
   public startStop(): boolean {
@@ -79,7 +87,6 @@ export class GameControlsComponent implements OnInit, OnDestroy {
     this.game.next();
   }
 
-  // TODO SAM move to other component
   public addSeconds(seconds: number, player?: Player): void {
     this.answerAudio.currentTime = 0;
     this.answerAudio.play();
@@ -89,9 +96,11 @@ export class GameControlsComponent implements OnInit, OnDestroy {
       this.countAudio.pause();
       player.secondsLeft = 0;
       this.playerDead.play();
+      this.gameStore.save(this.game);
       return;
     }
-    this.game.selectedPlayer.secondsLeft += seconds;
+    player.secondsLeft += seconds;
+    this.gameStore.save(this.game);
   }
 
   ngOnDestroy(): void {

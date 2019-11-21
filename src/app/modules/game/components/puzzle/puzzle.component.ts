@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Game } from 'src/app/shared/models/game.model';
 import { GameStore } from 'src/app/core/services/store/game.store';
 import { takeUntil } from 'rxjs/operators';
 import { Store } from 'src/app/core/services/store/stores';
 import { Subject } from 'rxjs';
 import { Configuration } from 'src/app/app.constants';
+import { GameControlsComponent } from '../game-controls/game-controls.component';
 
 @Component({
   selector: 'app-puzzle',
@@ -13,11 +14,13 @@ import { Configuration } from 'src/app/app.constants';
 })
 export class PuzzleComponent implements OnInit, OnDestroy {
 
+  @ViewChild('gamecontrols', { static: false })
+  private gameControls: GameControlsComponent;
+
   game: Game;
   current: number;
   private unsubscribe: Subject<void> = new Subject();
   answers: number[];
-  private answerAudio: HTMLAudioElement;
 
   constructor(
     private gameStore: GameStore,
@@ -41,16 +44,16 @@ export class PuzzleComponent implements OnInit, OnDestroy {
     for (let i = 1; i <= this.configuration.PuzzleAnswers; i++) {
       this.answers.push(i);
     }
-
-    this.answerAudio = new Audio('./assets/sounds/answer-correct.mp3');
-    this.answerAudio.load();
   }
 
   public correct(): void {
-    this.answerAudio.currentTime = 0;
-    this.answerAudio.play();
-    this.game.selectedPlayer.secondsLeft += this.configuration.PuzzleSeconds;
-    this.current++;
+    if (this.current >= this.configuration.PuzzleAnswers) {
+      return;
+    }
+    this.gameControls.addSeconds(this.configuration.PuzzleSeconds);
+    if (++this.current >= this.configuration.PuzzleAnswers) {
+      this.gameControls.stop();
+    }
   }
 
   public reset(): void {
