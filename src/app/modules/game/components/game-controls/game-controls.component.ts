@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { timer, Subject } from 'rxjs';
+import { timer, Subject, Observable, fromEvent } from 'rxjs';
 import { Player } from 'src/app/shared/models/player.model';
-import { takeUntil, filter } from 'rxjs/operators';
+import { takeUntil, filter, map } from 'rxjs/operators';
 import { Game } from 'src/app/shared/models/game.model';
 import { GameStore } from 'src/app/core/services/store/game.store';
 
@@ -49,6 +49,29 @@ export class GameControlsComponent implements OnInit, OnDestroy {
     this.playerDead.load();
     this.answerAudio = new Audio('./assets/sounds/answer-correct.mp3');
     this.answerAudio.load();
+
+    fromEvent(document.body, 'keyup')
+      .pipe(
+        takeUntil(this.unsubscribe),
+        map((e: KeyboardEvent) => typeof (e.key) !== 'undefined' ? e.key : String.fromCharCode(e.keyCode)),
+        map((text: string) => text.toUpperCase()),
+      )
+      .subscribe((code: string) => {
+        switch (code) {
+          case 'S':
+          case ' ':
+            this.startStop();
+            break;
+          case '4':
+          case 'ARROWLEFT':
+            this.previous();
+            break;
+          case '6':
+          case 'ARROWRIGHT':
+            this.next();
+            break;
+        }
+      });
   }
 
   public stop(): boolean {
