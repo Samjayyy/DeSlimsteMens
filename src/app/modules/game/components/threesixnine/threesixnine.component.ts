@@ -55,6 +55,7 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
       this.answerAudio.currentTime = 0;
       this.answerAudio.play();
       this.game.selectedPlayer.secondsLeft += this.configuration.ThreeSixNineSeconds;
+      this.gameStore.save(this.game);
     }
     this.current++;
     this.starter = this.game.selected;
