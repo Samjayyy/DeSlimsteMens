@@ -19,7 +19,7 @@
     </span>
 </div>
 
-<div *ngIf="game && answers">
+<div *ngIf="this.game && this.answers">
     <div class="row">
         <div class="col-10">
             <button class="btn btn-success btn-block btn-lg" [disabled]="this.current >= this.answers.length" (click)="this.correct()">
@@ -36,5 +36,5 @@
 </div>
 
 <div class="game-controls">
-    <app-game-controls [game]="game" #gamecontrols></app-game-controls>
+    <app-game-controls [game]="this.game" #gamecontrols></app-game-controls>
 </div>
