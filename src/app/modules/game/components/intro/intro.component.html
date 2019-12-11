@@ -1,5 +1,5 @@
-<div class="players clocks row" *ngIf="this.game && this.game.players">
-    <div *ngFor="let player of this.game.players" class="col">
+<div class="players clocks row" *ngIf="game && game.players">
+    <div *ngFor="let player of game.players" class="col">
         <div class="text-center margin-auto">
             <app-countdown [player]="player"></app-countdown>
         </div>
@@ -7,7 +7,7 @@
 </div>
 <hr />
 <div class="skip">
-    <button type="button" class="btn btn-block btn-lg btn-outline-dark" (click)="this.skipIntro()">
+    <button type="button" class="btn btn-block btn-lg btn-outline-dark" (click)="skipIntro()">
         <i class="fa fa-fast-forward"></i> Skip
     </button>
 </div>
