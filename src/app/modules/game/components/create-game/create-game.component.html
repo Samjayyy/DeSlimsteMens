@@ -8,22 +8,22 @@
                 <div class="form-group">
                     <label for="playerscount">Aantal:</label>
                     <select class="form-control form-control-lg" name="playerscount" id="playerscount"
-                        [(ngModel)]="this.playerscount" (change)="this.refreshFilteredPlayers()">
-                        <option *ngFor="let name of this.players;let i=index">{{i + 1}}</option>
+                        [(ngModel)]="playerscount" (change)="refreshFilteredPlayers()">
+                        <option *ngFor="let name of players;let i=index">{{i + 1}}</option>
                     </select>
                 </div>
                 <div class="playernames">
                     <div class="row">
-                        <div class="col form-group" *ngFor="let name of this.filteredPlayers;let i=index">
-                            <input [disabled]="this.playerscount && i >= this.playerscount"
+                        <div class="col form-group" *ngFor="let name of filteredPlayers;let i=index">
+                            <input [disabled]="playerscount && i >= playerscount"
                                 placeholder="Speler {{i + 1}}" type="text" class="form-control form-control-lg"
                                 name="name_player{{i}}" id="name_player{{i}}" maxlength="30"
-                                [(ngModel)]="this.filteredPlayers[i].name" />
+                                [(ngModel)]="filteredPlayers[i].name" />
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-lg btn-outline-dark" (click)="this.createGame()">
+                    <button type="button" class="btn btn-block btn-lg btn-outline-dark" (click)="createGame()">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i> Start
                     </button>
                 </div>
