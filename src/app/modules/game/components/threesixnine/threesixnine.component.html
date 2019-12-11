@@ -1,4 +1,4 @@
-<div *ngIf="!game">
+<div *ngIf="!this.game">
     <button type="button" class="btn btn-block btn-lg btn-outline-dark" [routerLink]="['/create']">
         <i class="fa fa-gamepad"></i> New Game
     </button>
@@ -12,7 +12,7 @@
 </div>
 <div class="questions text-center" *ngIf="this.questions">
     <span *ngFor="let question of this.questions" class="number" [class.font-weight-bold]="question % 3 === 0"
-        [class.painted]="question === current">
+        [class.painted]="question === this.current">
         {{question}}
     </span>
 </div>
