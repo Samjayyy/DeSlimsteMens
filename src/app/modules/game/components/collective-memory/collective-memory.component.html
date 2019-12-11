@@ -5,9 +5,9 @@
 </div>
 
 <div class="players clocks row" *ngIf="this.game && this.game.players">
-    <div *ngFor="let player of game.players" class="col">
+    <div *ngFor="let player of this.game.players" class="col">
         <div class="text-center margin-auto">
-            <app-countdown [player]="this.player"></app-countdown>
+            <app-countdown [player]="player"></app-countdown>
         </div>
     </div>
 </div>
