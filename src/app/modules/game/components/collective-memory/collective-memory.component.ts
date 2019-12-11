@@ -24,9 +24,7 @@ export class CollectiveMemoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // get the game
@@ -41,18 +39,18 @@ export class CollectiveMemoryComponent implements OnInit, OnDestroy {
     this.answers = [];
     this.reset();
     // add questions
-    for (let i = 1; i <= this.configuration.CollectiveMemoryAnswers; i++) {
+    for (let i = 1; i <= Configuration.CollectiveMemoryAnswers; i++) {
       this.answers.push(i);
     }
   }
 
   public correct(): void {
-    if (this.current >= this.configuration.CollectiveMemoryAnswers) {
+    if (this.current >= Configuration.CollectiveMemoryAnswers) {
       return;
     }
     ++this.current;
-    this.gameControls.addSeconds(this.current * this.configuration.CollectiveMemorySeconds);
-    if (this.current === this.configuration.CollectiveMemoryAnswers) {
+    this.gameControls.addSeconds(this.current * Configuration.CollectiveMemorySeconds);
+    if (this.current === Configuration.CollectiveMemoryAnswers) {
       this.gameControls.stop();
     }
   }
@@ -62,10 +60,10 @@ export class CollectiveMemoryComponent implements OnInit, OnDestroy {
   }
 
   public get secondsDiff(): string {
-    if (this.current >= this.configuration.CollectiveMemoryAnswers) {
+    if (this.current >= Configuration.CollectiveMemoryAnswers) {
       return 'well done';
     }
-    return `+ ${(1 + this.current) * this.configuration.CollectiveMemorySeconds}`;
+    return `+ ${(1 + this.current) * Configuration.CollectiveMemorySeconds}`;
   }
 
   ngOnDestroy(): void {

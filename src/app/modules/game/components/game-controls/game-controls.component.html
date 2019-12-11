@@ -1,22 +1,29 @@
 <hr />
+
 <div *ngIf="!this.game">
     <button type="button" class="btn btn-block btn-lg btn-outline-dark" [routerLink]="['/create']">
         <i class="fa fa-gamepad"></i> New Game
     </button>
 </div>
+
 <div *ngIf="this.game">
     <div class="row">
         <div class="col-12">
-            <button class="btn btn-orange btn-rounded waves-effect btn-lg btn-block" (click)="this.startStop()"><i
-                    class="fa fa-clock-o" aria-hidden="true"></i> {{ this.progress ? 'Stop' : 'Start' }}</button>
+            <button class="btn btn-orange btn-rounded waves-effect btn-lg btn-block" (click)="this.startStop()">
+                <i class="fa fa-clock-o" aria-hidden="true"></i> {{ this.progress ? 'Stop' : 'Start' }}
+            </button>
         </div>
+
         <div class="col-6">
-            <button *ngIf="!this.progress" class="btn btn-orange btn-lg btn-rounded waves-effect btn-block"
-                (click)="this.previous()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button *ngIf="!progress" class="btn btn-orange btn-lg btn-rounded waves-effect btn-block" (click)="this.previous()">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </button>
         </div>
+
         <div class="col-6">
-            <button *ngIf="!this.progress" class="btn btn-orange btn-lg btn-rounded waves-effect btn-block"
-                (click)="this.next()"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+            <button *ngIf="!progress" class="btn btn-orange btn-lg btn-rounded waves-effect btn-block" (click)="this.next()">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
 </div>

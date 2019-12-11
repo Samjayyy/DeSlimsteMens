@@ -23,12 +23,11 @@ export class CreateGameComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration,
     private router: Router
   ) {
     this.playerscount = 3; // most common setting
     this.players = [];
-    for (let i = 0; i < this.configuration.MaxNumberOfPlayers; i++) {
+    for (let i = 0; i < Configuration.MaxNumberOfPlayers; i++) {
       this.players.push(new Player());
     }
     this.refreshFilteredPlayers();
@@ -59,7 +58,7 @@ export class CreateGameComponent implements OnInit, OnDestroy {
         || player.name.length < 1) {
         return false;
       }
-      player.secondsLeft = this.configuration.StartSeconds;
+      player.secondsLeft = Configuration.StartSeconds;
       player.selected = false;
     }
     const game = Game.fromPlayers(this.filteredPlayers);

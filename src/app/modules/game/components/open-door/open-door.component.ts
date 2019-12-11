@@ -24,9 +24,7 @@ export class OpenDoorComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // get the game
@@ -41,17 +39,17 @@ export class OpenDoorComponent implements OnInit, OnDestroy {
     this.answers = [];
     this.reset();
     // add questions
-    for (let i = 1; i <= this.configuration.OpenDoorAnswers; i++) {
+    for (let i = 1; i <= Configuration.OpenDoorAnswers; i++) {
       this.answers.push(i);
     }
   }
 
   public correct(): void {
-    if (this.current >= this.configuration.OpenDoorAnswers) {
+    if (this.current >= Configuration.OpenDoorAnswers) {
       return;
     }
-    this.gameControls.addSeconds(this.configuration.OpenDoorSeconds);
-    if (++this.current >= this.configuration.OpenDoorAnswers) {
+    this.gameControls.addSeconds(Configuration.OpenDoorSeconds);
+    if (++this.current >= Configuration.OpenDoorAnswers) {
       this.gameControls.stop();
     }
   }
@@ -61,10 +59,10 @@ export class OpenDoorComponent implements OnInit, OnDestroy {
   }
 
   public get secondsDiff(): string {
-    if (this.current >= this.configuration.OpenDoorAnswers) {
+    if (this.current >= Configuration.OpenDoorAnswers) {
       return 'well done';
     }
-    return `+ ${this.configuration.OpenDoorSeconds}`;
+    return `+ ${Configuration.OpenDoorSeconds}`;
   }
 
   ngOnDestroy(): void {

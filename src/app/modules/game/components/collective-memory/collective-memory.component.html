@@ -3,6 +3,7 @@
         <i class="fa fa-gamepad"></i> New Game
     </button>
 </div>
+
 <div class="players clocks row" *ngIf="this.game && this.game.players">
     <div *ngFor="let player of this.game.players" class="col">
         <div class="text-center margin-auto">
@@ -10,24 +11,30 @@
         </div>
     </div>
 </div>
+
 <div class="answers text-center" *ngIf="this.answers">
     <span *ngFor="let answer of this.answers" class="number" [class.font-weight-bold]="answer === this.current"
         [class.painted]="answer <= this.current">
         {{answer}}
     </span>
 </div>
+
 <div *ngIf="this.game && this.answers">
     <div class="row">
         <div class="col-10">
-            <button class="btn btn-success btn-block btn-lg" [disabled]="this.current >= this.answers.length"
-                (click)="this.correct()"><i class="fa fa-check" aria-hidden="true"></i> ({{this.secondsDiff}})</button>
+            <button class="btn btn-success btn-block btn-lg" [disabled]="this.current >= this.answers.length" (click)="this.correct()">
+                <i class="fa fa-check" aria-hidden="true"></i> ({{secondsDiff}})
+            </button>
         </div>
+
         <div class="col-2">
-            <button class="btn btn-danger btn-block btn-lg" (click)="this.reset()"><i class="fa fa-refresh"
-                    aria-hidden="true"></i> Reset</button>
+            <button class="btn btn-danger btn-block btn-lg" (click)="this.reset()">
+                <i class="fa fa-refresh" aria-hidden="true"></i> Reset
+            </button>
         </div>
     </div>
 </div>
+
 <div class="game-controls">
     <app-game-controls [game]="this.game" #gamecontrols></app-game-controls>
 </div>
