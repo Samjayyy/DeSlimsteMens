@@ -1,43 +1,43 @@
-<div *ngIf="!this.game">
+<div *ngIf="!game">
     <button type="button" class="btn btn-block btn-lg btn-outline-dark" [routerLink]="['/create']">
         <i class="fa fa-gamepad"></i> New Game
     </button>
 </div>
-<div class="players clocks row" *ngIf="this.game && this.game.players">
-    <div *ngFor="let player of this.game.players" class="col">
+<div class="players clocks row" *ngIf="game && game.players">
+    <div *ngFor="let player of game.players" class="col">
         <div class="text-center margin-auto">
             <app-countdown [player]="player"></app-countdown>
         </div>
     </div>
 </div>
-<div class="questions text-center" *ngIf="this.questions">
-    <span *ngFor="let question of this.questions" class="number" [class.font-weight-bold]="question === this.current"
-        [class.painted]="this.solved >= question">
+<div class="questions text-center" *ngIf="questions">
+    <span *ngFor="let question of questions" class="number" [class.font-weight-bold]="question === current"
+        [class.painted]="solved >= question">
         {{question}}
     </span>
 </div>
-<div *ngIf="this.game && this.questions">
-    <div class="row" *ngIf="this.current <= this.questions.length">
+<div *ngIf="game && questions">
+    <div class="row" *ngIf="current <= questions.length">
         <div class="col-6">
-            <button class="btn btn-success btn-block btn-lg" (click)="this.correct()"><i class="fa fa-check"
-                    aria-hidden="true"></i> ({{this.secondsDiff}})</button>
+            <button class="btn btn-success btn-block btn-lg" (click)="correct()"><i class="fa fa-check"
+                    aria-hidden="true"></i> ({{secondsDiff}})</button>
         </div>
         <div class="col-6">
-            <button class="btn btn-danger btn-block btn-lg" (click)="this.incorrect()"><i class="fa fa-times"
+            <button class="btn btn-danger btn-block btn-lg" (click)="incorrect()"><i class="fa fa-times"
                     aria-hidden="true"></i></button>
         </div>
     </div>
-    <div class="row" *ngIf="this.current > this.questions.length">
+    <div class="row" *ngIf="current > questions.length">
         <div class="col-10">
-            <button class="btn btn-success btn-block btn-lg" [disabled]="this.solved >= this.questions.length"
-                (click)="this.correct()"><i class="fa fa-check" aria-hidden="true"></i> ({{this.secondsDiff}})</button>
+            <button class="btn btn-success btn-block btn-lg" [disabled]="solved >= questions.length"
+                (click)="correct()"><i class="fa fa-check" aria-hidden="true"></i> ({{secondsDiff}})</button>
         </div>
         <div class="col-2">
-            <button class="btn btn-danger btn-block btn-lg" (click)="this.reset()"><i class="fa fa-refresh"
+            <button class="btn btn-danger btn-block btn-lg" (click)="reset()"><i class="fa fa-refresh"
                     aria-hidden="true"></i> Reset</button>
         </div>
     </div>
 </div>
 <div class="game-controls">
-    <app-game-controls [game]="this.game" #gamecontrols></app-game-controls>
+    <app-game-controls [game]="game" #gamecontrols></app-game-controls>
 </div>
