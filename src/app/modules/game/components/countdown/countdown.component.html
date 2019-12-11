@@ -1,9 +1,11 @@
-<div class="countdown text-light" [class.font-weight-bold]="player.selected">
+<div class="countdown text-light" [class.font-weight-bold]="this.player.selected">
     <div class="player-name">
-        <span>{{ player.name }}</span>
+        <span>{{ this.player.name }}</span>
     </div>
-    <hr [class.bg-light]="player.selected" />
+
+    <hr [class.bg-light]="this.player.selected" />
+
     <div class="timer">
-        <div class="time-display">{{ player.secondsLeft}}</div>
+        <div class="time-display">{{ this.player.secondsLeft}}</div>
     </div>
 </div>

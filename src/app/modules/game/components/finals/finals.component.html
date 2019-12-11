@@ -1,52 +1,60 @@
-<div *ngIf="!game">
+<div *ngIf="!this.game">
     <button type="button" class="btn btn-block btn-lg btn-outline-dark" [routerLink]="['/create']">
         <i class="fa fa-gamepad"></i> New Game
     </button>
 </div>
+
 <div class="players clocks row">
     <div class="col">
-        <div class="text-center margin-auto" *ngIf="player1">
-            <app-countdown [player]="player1"></app-countdown>
+        <div class="text-center margin-auto" *ngIf="this.player1">
+            <app-countdown [player]="this.player1"></app-countdown>
         </div>
     </div>
     <div class="col">
-        <div class="text-center margin-auto" *ngIf="player2">
-            <app-countdown [player]="player2"></app-countdown>
+        <div class="text-center margin-auto" *ngIf="this.player2">
+            <app-countdown [player]="this.player2"></app-countdown>
         </div>
     </div>
 </div>
-<div class="answers text-center" *ngIf="answers">
-    <span *ngFor="let answer of answers" class="number" [class.font-weight-bold]="answer === current"
-        [class.painted]="answer <= current">
+
+<div class="answers text-center" *ngIf="this.answers">
+    <span *ngFor="let answer of this.answers" class="number" [class.font-weight-bold]="answer === this.current"
+        [class.painted]="answer <= this.current">
         {{answer}}
     </span>
 </div>
+
 <div *ngIf="game && answers">
     <div class="row">
         <div class="col-10">
-            <button class="btn btn-success btn-block btn-lg" [disabled]="current >= answers.length"
-                (click)="correct()"><i class="fa fa-check" aria-hidden="true"></i> ({{secondsDiff}})</button>
+            <button class="btn btn-success btn-block btn-lg" [disabled]="this.current >= this.answers.length" (click)="this.correct()">
+                <i class="fa fa-check" aria-hidden="true"></i> ({{secondsDiff}})
+            </button>
         </div>
         <div class="col-2">
-            <button class="btn btn-danger btn-block btn-lg" (click)="reset()"><i class="fa fa-refresh"
-                    aria-hidden="true"></i> Reset</button>
+            <button class="btn btn-danger btn-block btn-lg" (click)="this.reset()">
+                <i class="fa fa-refresh" aria-hidden="true"></i> Reset
+            </button>
         </div>
     </div>
 </div>
+
 <div class="game-controls">
-    <app-game-controls [game]="game" #gamecontrols></app-game-controls>
+    <app-game-controls [game]="this.game" #gamecontrols></app-game-controls>
 </div>
-<div class="row finalists" *ngIf="game && game.players.length > 1">
+
+<div class="row finalists" *ngIf="this.game && this.game.players.length > 1">
     <div class="col">
-        <select class="form-control" [(ngModel)]="player1">
-            <option *ngFor="let player of game.players" [ngValue]="player">
+        <select class="form-control" [(ngModel)]="this.player1">
+            <option *ngFor="let player of this.game.players" [ngValue]="player">
                 {{player.name}}
             </option>
         </select>
     </div>
+
     <div class="col">
-        <select class="form-control" [(ngModel)]="player2">
-            <option *ngFor="let player of game.players" [ngValue]="player">
+        <select class="form-control" [(ngModel)]="this.player2">
+            <option *ngFor="let player of this.game.players" [ngValue]="player">
                 {{player.name}}
             </option>
         </select>
