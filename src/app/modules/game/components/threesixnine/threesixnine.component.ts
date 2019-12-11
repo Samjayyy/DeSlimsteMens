@@ -22,9 +22,7 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // get the game
@@ -42,7 +40,7 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
     this.questions = [];
     this.current = 1;
     // add questions
-    for (let i = 1; i <= this.configuration.ThreeSixNineQuestions; i++) {
+    for (let i = 1; i <= Configuration.ThreeSixNineQuestions; i++) {
       this.questions.push(i);
     }
 
@@ -54,7 +52,7 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
     if (this.current % 3 === 0) {
       this.answerAudio.currentTime = 0;
       this.answerAudio.play();
-      this.game.selectedPlayer.secondsLeft += this.configuration.ThreeSixNineSeconds;
+      this.game.selectedPlayer.secondsLeft += Configuration.ThreeSixNineSeconds;
       this.gameStore.save(this.game);
     }
     this.current++;
@@ -70,7 +68,7 @@ export class ThreeSixNineComponent implements OnInit, OnDestroy {
 
   public get secondsDiff(): string {
     if (this.current % 3 === 0) {
-      return `+ ${this.configuration.ThreeSixNineSeconds}`;
+      return `+ ${Configuration.ThreeSixNineSeconds}`;
     }
     return 'voor de eer';
   }

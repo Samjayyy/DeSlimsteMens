@@ -1,19 +1,16 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({ providedIn: 'root' })
-export class Configuration {
-    public readonly StartSeconds = 60;
-    public readonly ThreeSixNineSeconds = 10;
-    public readonly MaxNumberOfPlayers = 4;
-    public readonly ThreeSixNineQuestions = 15;
-    public readonly OpenDoorAnswers = 4;
-    public readonly OpenDoorSeconds = 20;
-    public readonly PuzzleAnswers = 3;
-    public readonly PuzzleSeconds = 30;
-    public readonly GalleryQuestions = 10;
-    public readonly GallerySeconds = 15;
-    public readonly CollectiveMemoryAnswers = 5;
-    public readonly CollectiveMemorySeconds = 10;
-    public readonly FinalsAnswers = 5;
-    public readonly FinalsSeconds = 20;
+export const Configuration = {
+    StartSeconds: 60,
+    ThreeSixNineSeconds: 10,
+    MaxNumberOfPlayers: 4,
+    ThreeSixNineQuestions: 15,
+    OpenDoorAnswers: 4,
+    OpenDoorSeconds: 20,
+    PuzzleAnswers: 3,
+    PuzzleSeconds: 30,
+    GalleryQuestions: 10,
+    GallerySeconds: 15,
+    CollectiveMemoryAnswers: 5,
+    CollectiveMemorySeconds: 10,
+    FinalsAnswers: 5,
+    FinalsSeconds: 20,
 }

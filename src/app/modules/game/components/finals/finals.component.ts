@@ -27,9 +27,7 @@ export class FinalsComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // get the game
@@ -63,7 +61,7 @@ export class FinalsComponent implements OnInit, OnDestroy {
     // init round answsers
     this.answers = [];
     // add questions
-    for (let i = 1; i <= this.configuration.FinalsAnswers; i++) {
+    for (let i = 1; i <= Configuration.FinalsAnswers; i++) {
       this.answers.push(i);
     }
   }
@@ -72,7 +70,7 @@ export class FinalsComponent implements OnInit, OnDestroy {
     if (this.current >= this.answers.length) {
       return;
     }
-    this.gameControls.addSeconds(-this.configuration.FinalsSeconds, this.otherPlayer);
+    this.gameControls.addSeconds(-Configuration.FinalsSeconds, this.otherPlayer);
     if (++this.current === this.answers.length) {
       this.gameControls.stop();
     }
@@ -101,10 +99,10 @@ export class FinalsComponent implements OnInit, OnDestroy {
   }
 
   public get secondsDiff(): string {
-    if (this.current >= this.configuration.FinalsAnswers) {
+    if (this.current >= Configuration.FinalsAnswers) {
       return 'well done';
     }
-    return `- ${this.configuration.FinalsSeconds}`;
+    return `- ${Configuration.FinalsSeconds}`;
   }
 
   ngOnDestroy(): void {

@@ -25,9 +25,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // get the game
@@ -42,18 +40,18 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.questions = [];
     this.reset();
     // add questions
-    for (let i = 1; i <= this.configuration.GalleryQuestions; i++) {
+    for (let i = 1; i <= Configuration.GalleryQuestions; i++) {
       this.questions.push(i);
     }
   }
 
   public correct(): void {
-    if (this.solved >= this.configuration.GalleryQuestions) {
+    if (this.solved >= Configuration.GalleryQuestions) {
       return;
     }
     this.next();
-    this.gameControls.addSeconds(this.configuration.GallerySeconds);
-    if (++this.solved === this.configuration.GalleryQuestions) {
+    this.gameControls.addSeconds(Configuration.GallerySeconds);
+    if (++this.solved === Configuration.GalleryQuestions) {
       this.gameControls.stop();
     }
   }
@@ -63,8 +61,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   private next(): void {
-    if (this.current <= this.configuration.GalleryQuestions) {
-      if (++this.current > this.configuration.GalleryQuestions) {
+    if (this.current <= Configuration.GalleryQuestions) {
+      if (++this.current > Configuration.GalleryQuestions) {
         this.gameControls.stop();
       }
     }
@@ -76,10 +74,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   public get secondsDiff(): string {
-    if (this.solved >= this.configuration.GalleryQuestions) {
+    if (this.solved >= Configuration.GalleryQuestions) {
       return 'well done';
     }
-    return `+ ${this.configuration.GallerySeconds}`;
+    return `+ ${Configuration.GallerySeconds}`;
   }
 
   ngOnDestroy(): void {

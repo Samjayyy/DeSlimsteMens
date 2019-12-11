@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { timer, Subject, Observable, fromEvent } from 'rxjs';
+import { timer, Subject, fromEvent } from 'rxjs';
 import { Player } from 'src/app/shared/models/player.model';
 import { takeUntil, filter, map } from 'rxjs/operators';
 import { Game } from 'src/app/shared/models/game.model';

@@ -24,9 +24,7 @@ export class PuzzleComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameStore: GameStore,
-    private configuration: Configuration
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // get the game
@@ -41,17 +39,17 @@ export class PuzzleComponent implements OnInit, OnDestroy {
     this.answers = [];
     this.reset();
     // add questions
-    for (let i = 1; i <= this.configuration.PuzzleAnswers; i++) {
+    for (let i = 1; i <= Configuration.PuzzleAnswers; i++) {
       this.answers.push(i);
     }
   }
 
   public correct(): void {
-    if (this.current >= this.configuration.PuzzleAnswers) {
+    if (this.current >= Configuration.PuzzleAnswers) {
       return;
     }
-    this.gameControls.addSeconds(this.configuration.PuzzleSeconds);
-    if (++this.current >= this.configuration.PuzzleAnswers) {
+    this.gameControls.addSeconds(Configuration.PuzzleSeconds);
+    if (++this.current >= Configuration.PuzzleAnswers) {
       this.gameControls.stop();
     }
   }
@@ -61,10 +59,10 @@ export class PuzzleComponent implements OnInit, OnDestroy {
   }
 
   public get secondsDiff(): string {
-    if (this.current >= this.configuration.PuzzleAnswers) {
+    if (this.current >= Configuration.PuzzleAnswers) {
       return 'well done';
     }
-    return `+ ${this.configuration.PuzzleSeconds}`;
+    return `+ ${Configuration.PuzzleSeconds}`;
   }
 
   ngOnDestroy(): void {
